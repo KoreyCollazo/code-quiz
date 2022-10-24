@@ -19,15 +19,24 @@ header h2 {
     padding-right: 8%;
 }
 
+main {
+    padding-top: 30px;
+    padding-bottom: 500px;
+    background-color: rgb(113, 0, 218);
+    width: 100%;
+}
+
 #prompt {
-    font-size: 25px;
+    font-size: 30px;
     margin-left: 25%;
     margin-right: 25%;
     text-align: center;
+    color: white;
 }
 main div {
     margin: auto;
     width: 20%;
+    padding-top: 60px;
     
 }
 div button {
