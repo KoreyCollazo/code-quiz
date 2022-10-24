@@ -2,33 +2,34 @@ var timerEl = document.getElementById('time')
 var start = document.getElementById('start')
 var questionEl = document.getElementById('prompt')
 var selectionArea = document.getElementById('user-selection')
-var score
+var score = 0
+var timeLeft = 60;
 i = 0;
 
 let questionsList = [{
     question: "which of the following isnt a language?",
     answer: ["html", "css", "javascript", "java chip frappuccino"],
-    correctAnswer: 4
+    correctAnswer: "java chip frappuccino"
 }, {
     question: "which of the following is a semantic hmtl element?",
     answer: ["air conditioner", "header", "bug spray", "candle"],
-    correctAnswer: 2
+    correctAnswer: "header"
 }, {
     question: "which of the following says correct?",
     answer: ["correct", "wrong", "wrong", "wrong"],
-    correctAnswer: 1
+    correctAnswer: "correct"
 }, {
     question: "which of the following says correct?",
     answer: ["wrong", "wrong", "correct", "wrong"],
-    correctAnswer: 3
+    correctAnswer: "correct"
 }, {
     question: "which of the following says correct?",
     answer: ["correct", "wrong", "wrong", "wrong"],
-    correctAnswer5: 1
+    correctAnswer: "correct"
 }, {
     question: "which of the following says correct?",
     answer: ["wrong", "wrong", "wrong", "correct"],
-    correctAnswer: 4
+    correctAnswer: "correct"
 }]
 
 
@@ -37,15 +38,17 @@ let questionsList = [{
 
 function countdown() {
     //starting time
-    var timeLeft = 60;
+    
     var timeInterval = setInterval(function () {
         timeLeft--;
-        timerEl.textContent = timeLeft + " seconds remaing";
-        if(timeLeft === 0) {
+        timerEl.textContent = timeLeft;
+        if(timeLeft <= 0) {
             clearInterval(timeInterval);
+            timerEl.innerHTML = ""
             alert("game over, how well did you do?");
             removeAllChildNodes(selectionArea);
             questionEl.textContent = "Congrats here is your score!"
+            displayScore()
           }
       
         }, 1000);
@@ -62,24 +65,30 @@ function displayQuestions(){
         choices.appendChild(item)
         item.appendChild(document.createTextNode(questionsList[i].answer[q]))
     }
-
-
-
-    var questionEl = document.getElementById('prompt')
-    questionEl.textContent = questionsList[i].question;
-
-    var buttons = document.getElementById("list")
-
-    buttons.addEventListener("click", function(event){
-        var element = event.target;
-        if (element.matches("button") === true) {
+        var questionEl = document.getElementById('prompt')
+        questionEl.textContent = questionsList[i].question;
+        var buttons = document.getElementById("list")
+        buttons.addEventListener("click", function(event){
+        var correctAnswer = (questionsList[i].correctAnswer)
+        var selectedAnswer = event.target
+        if(correctAnswer != selectedAnswer.innerText){
+            timeLeft -= 10
+            timerEl.innerHTML = timeLeft
+        }
+        if (correctAnswer === selectedAnswer.innerText){
+            score++;
+        } if (selectedAnswer.matches("button") === true) {
         removeAllChildNodes(selectionArea);
         i++;
         } if (i < 6){
             displayQuestions();
         } if (i === 6){
+            timeLeft -= timeLeft
+            timerEl.innerHTML = timeLeft
             questionEl.textContent = "Congrats here is your score!"
-        }
+            displayScore()
+        } 
+         
     });
 };
 
@@ -90,8 +99,6 @@ function removeAllChildNodes(parent) {
     }
 }
 
-
-
 start.addEventListener("click", function(){
     countdown();
     start.remove();
@@ -99,3 +106,9 @@ start.addEventListener("click", function(){
 });
 
 
+function displayScore(){
+    var scoreP= document.createElement("p")
+    scoreP.appendChild(document.createTextNode(score + " out of 6"))
+    scoreP.style.fontSize = "45px"
+    selectionArea.appendChild(scoreP)
+    }
