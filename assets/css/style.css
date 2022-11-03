@@ -1,3 +1,7 @@
+*{
+background-color: white;
+}
+
 header {
     display:flex;
     padding-bottom: 3%;
