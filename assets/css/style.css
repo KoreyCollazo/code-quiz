@@ -19,12 +19,41 @@ header h2 {
     padding-right: 8%;
 }
 
+#current-question-label {
+    position: absolute;
+    width: 100%;
+}
+
+#current-question-label p{
+    position: relative;
+    top: 50px;
+    text-align: center;
+    font-size: 25px;
+}
+
+#homepage-button {
+    visibility: hidden;
+}
+
 main {
     padding-top: 30px;
     padding-bottom: 500px;
     background-color: rgb(113, 0, 218);
     width: 100%;
 }
+
+.responce {
+    position: absolute;
+    width: 100%;
+}
+
+#correct-or-incorrect {
+    position: relative;
+    top: -100px;
+    text-align: center;
+    font-size: 30px;
+}
+
 
 #prompt {
     font-size: 30px;
@@ -33,6 +62,30 @@ main {
     text-align: center;
     color: white;
 }
+
+#score-board {
+    background-color: rgb(149, 183, 247);
+    padding-top: 0%;
+    width: 270px;
+}
+
+#score-board h2 {
+    text-align: center; 
+    padding-top: 10px;
+}
+
+#user-names {
+    text-align: center;
+    padding-left: 0%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+ul#user-names:nth-child(2) {
+    background-color: burlywood;
+    font-size: 20px;
+}
+
 main div {
     margin: auto;
     width: 20%;
